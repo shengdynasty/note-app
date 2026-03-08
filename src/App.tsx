@@ -4,6 +4,7 @@ import Library from './components/Library/Library';
 import Editor from './components/Editor/Editor';
 import SettingsModal from './components/Settings/SettingsModal';
 import LearnPanel from './components/AI/LearnPanel';
+import LandingPage from './components/Landing/LandingPage';
 import './index.css';
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
 
   const [learnNoteId, setLearnNoteId] = useState<string | null>(null);
   const learnNote = store.notes.find(n => n.id === learnNoteId);
+  const [inApp, setInApp] = useState(false);
 
   // Apply CSS theme variables
   useEffect(() => {
@@ -25,6 +27,8 @@ export default function App() {
       document.body.classList.remove('dark-theme');
     }
   }, [store.currentTheme]);
+
+  if (!inApp) return <LandingPage onEnterApp={() => setInApp(true)} />;
 
   return (
     <>
